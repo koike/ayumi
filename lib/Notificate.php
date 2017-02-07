@@ -110,9 +110,9 @@ class Notificate
             Notificate::post($url, $data);
         }
 
-        // // 無限に再起動するのを防ぐために一旦スリープする
-        // sleep(5 * 60);
-        // exec('nohup php ayumi.php > /dev/null 2>&1 &', $arr, $res);
+        // 無限に再起動するのを防ぐために一旦スリープする
+        sleep(5 * 60);
+        exec('nohup php ayumi.php > /dev/null 2>&1 &', $arr, $res);
     }
 
     public static function post($url, $data)
