@@ -3,9 +3,9 @@
 $composer = 'composer install';
 exec($composer, $arr, $ret);
 
-if(!file_exists('tomori.db'))
+if(!file_exists('ayumi.db'))
 {
-    $sql = 'sqlite3 tomori.db < setup.sql';
+    $sql = 'sqlite3 ayumi.db < setup.sql';
     exec($sql, $arr, $ret);
 }
 

@@ -71,13 +71,13 @@ for($i=0; $i<$c; $i++)
     );
 
     $response = Request::get($url);
-    $tomori = new Analyze($url);
-    $tomori->analyze($response);
+    $ayumi = new Analyze($url);
+    $ayumi->analyze($response);
     
-    if($tomori->get_is_mallicious())
+    if($ayumi->get_is_mallicious())
     {
-        $tomori->register_db();
-        Notificate::slack($tomori);
+        $ayumi->register_db();
+        Notificate::slack($ayumi);
         echo '[*] (' . ($c-$i) . ') ' . $url . PHP_EOL;
     }
     else

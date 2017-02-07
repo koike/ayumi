@@ -16,7 +16,7 @@ class DB
             (
                 [
                     'driver'    => 'sqlite',
-                    'database'  => 'tomori.db'
+                    'database'  => 'ayumi.db'
                 ]
             );
             static::$db->setEventDispatcher(new Dispatcher(new Container));

@@ -4,26 +4,26 @@ use GuzzleHttp\Client;
 
 class Notificate
 {
-    public static function slack(Analyze $tomori)
+    public static function slack(Analyze $ayumi)
     {
-        if($tomori->get_url() != null)
+        if($ayumi->get_url() != null)
         {
             $token = getenv('SLACK_TOKEN');
             if($token != null && $token != '')
             {
                 $channel = '#alert';
-                $text = '[Compromised (' . $tomori->get_description() . ')] ' . date('Y-m-d H:i:s') .
+                $text = '[Compromised (' . $ayumi->get_description() . ')] ' . date('Y-m-d H:i:s') .
                         "\n```\n" .
-                        $tomori->get_url() .
+                        $ayumi->get_url() .
                         "\n```\n\n" .
-                        "[Gist]\n" . $tomori->get_gist_url();
+                        "[Gist]\n" . $ayumi->get_gist_url();
                 $url = 'https://slack.com/api/chat.postMessage';
                 $data =
                 [
                     'token'     =>  $token,
                     'channel'   =>  $channel,
                     'text'      =>  $text,
-                    'username'  =>  'tomori'
+                    'username'  =>  'ayumi'
                 ];
                 Notificate::post($url, $data);
             }
@@ -48,7 +48,7 @@ class Notificate
                 'token'     =>  $token,
                 'channel'   =>  $channel,
                 'text'      =>  $text,
-                'username'  =>  'tomori'
+                'username'  =>  'ayumi'
             ];
             Notificate::post($url, $data);
         }
@@ -85,7 +85,7 @@ class Notificate
                 'token'     =>  $token,
                 'channel'   =>  $channel,
                 'text'      =>  $text,
-                'username'  =>  'tomori'
+                'username'  =>  'ayumi'
             ];
             Notificate::post($url, $data);
         }
@@ -105,14 +105,14 @@ class Notificate
                 'token'     =>  $token,
                 'channel'   =>  $channel,
                 'text'      =>  $text,
-                'username'  =>  'tomori'
+                'username'  =>  'ayumi'
             ];
             Notificate::post($url, $data);
         }
 
         // // 無限に再起動するのを防ぐために一旦スリープする
         // sleep(5 * 60);
-        // exec('nohup php tomori.php > /dev/null 2>&1 &', $arr, $res);
+        // exec('nohup php ayumi.php > /dev/null 2>&1 &', $arr, $res);
     }
 
     public static function post($url, $data)
