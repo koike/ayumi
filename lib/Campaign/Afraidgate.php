@@ -60,22 +60,29 @@ class Afraidgate
                     {
                         $host = $elements[count($elements) - 2] . '.' . $elements[count($elements) - 1];
                     }
-                    $dns = dns_get_record($host, DNS_NS);
-                    for($i=0; $i<count($dns); $i++)
+                    try
                     {
-                        if($dns[$i]['type'] == 'NS')
+                        $dns = dns_get_record($host, DNS_NS);
+                        for($i=0; $i<count($dns); $i++)
                         {
-                            $ns = $dns[$i]['target'];
-                            $elements = explode('.', $ns);
-                            if(count($elements) > 2)
+                            if($dns[$i]['type'] == 'NS')
                             {
-                                $ns = $elements[count($elements) - 2] . '.' . $elements[count($elements) - 1];
-                            }
-                            if($ns == 'afraid.org')
-                            {
-                                return true;
+                                $ns = $dns[$i]['target'];
+                                $elements = explode('.', $ns);
+                                if(count($elements) > 2)
+                                {
+                                    $ns = $elements[count($elements) - 2] . '.' . $elements[count($elements) - 1];
+                                }
+                                if($ns == 'afraid.org')
+                                {
+                                    return true;
+                                }
                             }
                         }
+                    }
+                    catch(\Exception $e)
+                    {
+                        //
                     }
                 }
             }
