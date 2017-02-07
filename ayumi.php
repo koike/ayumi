@@ -28,14 +28,10 @@ register_shutdown_function('shutdown_handler');
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
-echo 0;
-
 // csvを取得する
 $url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip';
 $data = file_get_contents($url);
 file_put_contents('top-1m.csv.zip', $data);
-
-echo 1;
 
 $zip = new ZipArchive;
 if ($zip->open('top-1m.csv.zip') === true)
@@ -44,8 +40,6 @@ if ($zip->open('top-1m.csv.zip') === true)
     $zip->close();
 }
 unlink('top-1m.csv.zip');
-
-echo 2;
 
 // csvを読み込む
 $file = new SplFileObject('top-1m.csv');
