@@ -1,0 +1,8 @@
+{
+    "require": {
+        "illuminate/database": "^5.3",
+        "illuminate/events": "^5.3",
+        "guzzlehttp/guzzle": "^6.2",
+        "vlucas/phpdotenv": "^2.4"
+    }
+}
