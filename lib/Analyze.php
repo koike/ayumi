@@ -121,16 +121,6 @@ class Analyze
             ];
         }
 
-        ob_start();
-        var_dump($files);
-        $files_dump = ob_get_contents();
-        ob_end_clean();
-        if(!file_exists('log'))
-        {
-            mkdir('log');
-        }
-        file_put_contents('log/' . date('Y_m_d_H_i_s') . '.txt', $files_dump);
-
         $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
         
         DB::table('GIST')

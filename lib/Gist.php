@@ -29,6 +29,16 @@ class Gist
 
     private static function post($url, $data)
     {
+        ob_start();
+        var_dump($data);
+        $dump = ob_get_contents();
+        ob_end_clean();
+        if(!file_exists('log'))
+        {
+            mkdir('log');
+        }
+        file_put_contents('log/' . date('Y_m_d_H_i_s') . '.txt', $dump);
+        
         $client = new Client();
         $res = $client
         ->post
