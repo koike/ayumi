@@ -75,7 +75,43 @@ class Afraidgate
                                 }
                                 if($ns == 'afraid.org')
                                 {
-                                    return true;
+                                    // JSを読み込む
+                                    $js_content = null;
+                                    
+                                    // schemeを含む場合(http://google.com/code.js)
+                                    if(preg_match('/^https?:\/\//', $js))
+                                    {
+                                        $js_content = file_get_contents($js);
+                                    }
+                                    // schemeを含まない場合(//google.com/code.js)
+                                    else if(preg_match('/^\/\//', $js))
+                                    {
+                                        $js_content = file_get_contents('http:' . $js);
+                                    }
+                                    // 相対パスの場合(/code.js)
+                                    else if(preg_match('/^\//', $js))
+                                    {
+                                        $js_content = file_get_contents($url . $js);
+                                    }
+                                    // 相対パスの場合(code.js)
+                                    else
+                                    {
+                                        $js_content = file_get_contents($url . '/' . $js);
+                                    }
+
+                                    $rate = 0;
+                                    if(preg_match('/style="position:absolute; top:-([0-9]{3,4})px/', $js_content))
+                                    {
+                                        $rate += 1;
+                                    }
+                                    if(preg_match('/iframe src="https?:\/\/([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $js_content))
+                                    {
+                                        $rate += 1;
+                                    }
+                                    if($rate >= 1)
+                                    {
+                                        return ['is_mallicious' => true, 'js' => $js, 'content' => $js_content];
+                                    }
                                 }
                             }
                         }
@@ -87,6 +123,6 @@ class Afraidgate
                 }
             }
         }
-        return false;
+        return ['is_mallicious' => false, 'js' => null, 'content' => null];
     }
 }

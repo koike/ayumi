@@ -7,7 +7,8 @@ class Analyze
     $is_mallicious,
     $result,
     $description,
-    $gist_url;
+    $gist_url,
+    $js_content;
     
     public function __construct(string $url)
     {
@@ -17,6 +18,7 @@ class Analyze
         $this->result = null;
         $this->description = null;
         $this->gist_url = null;
+        $this->js_content = null;
     }
     
     public function analyze(array $response) : bool
@@ -40,12 +42,13 @@ class Analyze
             $ei2 = EITest2::analyze($html);
             if($ei2)
             {
-                $this->description = 'EITest';
+                $this->description = 'EITest2';
             }
             $af = Afraidgate::analyze($html, $this->url);
-            if($af)
+            if($af['is_mallicious'])
             {
-                $this->description = 'Afraidgate';
+                $this->description = 'Afraidgate (' . $af['js'] . ')';
+                $this->js_content = $af['js_content'];
             }
             
             if($pd || $ei || $ei2 || $af)
@@ -85,17 +88,38 @@ class Analyze
         }
         
         // データをgistにPOSTする
-        $files =
-        [
-            "data.html" =>
+        if($this->js_content != null)
+        {
+            $files =
             [
-                'content'   =>  $this->html . ''
-            ],
-            'ip.json' =>
+                "data.html" =>
+                [
+                    'content'   =>  $this->html . ''
+                ],
+                'code.js' =>
+                [
+                    'content'   =>  $this->js_content . ''
+                ],
+                'ip.json' =>
+                [
+                    'content'   =>  json_encode($ip_addr) . ''
+                ]
+            ];
+        }
+        else
+        {
+            $files =
             [
-                'content'   =>  json_encode($ip_addr) . ''
-            ]
-        ];
+                "data.html" =>
+                [
+                    'content'   =>  $this->html . ''
+                ],
+                'ip.json' =>
+                [
+                    'content'   =>  json_encode($ip_addr) . ''
+                ]
+            ];
+        }
 
         ob_start();
         var_dump($files);
