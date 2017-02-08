@@ -2,7 +2,7 @@
 
 class Afraidgate
 {
-    public static function analyze(string $html, string $url) : bool
+    public static function analyze(string $html, string $url)
     {
         if
         (
@@ -28,7 +28,7 @@ class Afraidgate
                     // JSが同一サーバ上にある場合は無視
                     if($server_host == $host)
                     {
-                        return ['is_mallicious' => false, 'js' => null, 'content' => null];
+                        return null;
                     }
 
                     // 既に調べていないかデータベースを確認
@@ -42,7 +42,7 @@ class Afraidgate
                     );
                     if(!empty($url_accessed))
                     {
-                        return ['is_mallicious' => false, 'js' => null, 'content' => null];
+                        return null;
                     }
 
                     $date = date('Y-m-d H:i:s');
@@ -123,6 +123,6 @@ class Afraidgate
                 }
             }
         }
-        return ['is_mallicious' => false, 'js' => null, 'content' => null];
+        return null;
     }
 }

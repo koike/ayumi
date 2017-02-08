@@ -54,7 +54,7 @@ class Notificate
         }
     }
 
-    public static function exception(\Exception $e)
+    public static function exception($e)
     {
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
