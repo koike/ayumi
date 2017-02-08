@@ -31,7 +31,7 @@ $dotenv->load();
 $jump = 0;
 if($argc >= 2)
 {
-    $jump = intval($argv[1]);
+    $jump = 1000000 - intval($argv[1]);
 }
 
 while(true)
