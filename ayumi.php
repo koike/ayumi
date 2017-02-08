@@ -82,7 +82,7 @@ while(true)
         $ayumi = new Analyze($url);
         $ayumi->analyze($response);
         
-        if($ayumi->get_is_mallicious())
+        if($ayumi->get_is_malicious())
         {
             $ayumi->register_db();
             Notificate::slack($ayumi);

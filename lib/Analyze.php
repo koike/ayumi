@@ -4,7 +4,7 @@ class Analyze
 {
     private $url,
     $html,
-    $is_mallicious,
+    $is_malicious,
     $result,
     $description,
     $gist_url,
@@ -14,7 +14,7 @@ class Analyze
     {
         $this->url = $url;
         $this->html = null;
-        $this->is_mallicious = false;
+        $this->is_malicious = false;
         $this->result = null;
         $this->description = null;
         $this->gist_url = null;
@@ -53,12 +53,12 @@ class Analyze
             
             if($pd || $ei || $ei2 || $af)
             {
-                $this->is_mallicious = true;
+                $this->is_malicious = true;
                 return true;
             }
         }
         
-        $this->is_mallicious = false;
+        $this->is_malicious = false;
         return false;
     }
     
@@ -139,9 +139,9 @@ class Analyze
         return $this->url;
     }
     
-    public function get_is_mallicious()
+    public function get_is_malicious()
     {
-        return $this->is_mallicious;
+        return $this->is_malicious;
     }
     
     public function get_gist_url()
