@@ -28,6 +28,12 @@ register_shutdown_function('shutdown_handler');
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
+$jump = 0;
+if($argc >= 2)
+{
+    $jump = intval($argv[1]);
+}
+
 while(true)
 {
     // csvを取得する
@@ -58,7 +64,7 @@ while(true)
 
     $urls = array_reverse($urls);
     $c = count($urls);
-    for($i=0; $i<$c; $i++)
+    for($i=$jump; $i<$c; $i++)
     {
         $url = $urls[$i];
 
@@ -87,4 +93,5 @@ while(true)
             echo '[-] (' . ($c-$i) . ') ' . $url . PHP_EOL;
         }
     }
+    $jump = 0;
 }
