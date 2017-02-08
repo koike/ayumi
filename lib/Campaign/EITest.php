@@ -21,7 +21,7 @@ class EITest
         // http://小文字.大文字.大文字
         if(preg_match('/https?:\/\/([a-z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $html))
         {
-            $rate += 1;
+            $rate += 0.5;
         }
 
         // biw, ct, br_fl, tuif, oq
