@@ -110,7 +110,7 @@ class Afraidgate
                                     }
                                     if($rate >= 1)
                                     {
-                                        return ['is_mallicious' => true, 'js' => $js, 'content' => $js_content];
+                                        return ['is_malicious' => true, 'js' => $js, 'content' => $js_content];
                                     }
                                 }
                             }
