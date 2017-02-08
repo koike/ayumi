@@ -28,7 +28,7 @@ class Afraidgate
                     // JSが同一サーバ上にある場合は無視
                     if($server_host == $host)
                     {
-                        return false;
+                        return ['is_mallicious' => false, 'js' => null, 'content' => null];
                     }
 
                     // 既に調べていないかデータベースを確認
@@ -42,7 +42,7 @@ class Afraidgate
                     );
                     if(!empty($url_accessed))
                     {
-                        return false;
+                        return ['is_mallicious' => false, 'js' => null, 'content' => null];
                     }
 
                     $date = date('Y-m-d H:i:s');
