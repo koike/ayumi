@@ -29,48 +29,31 @@ class Analyze
         
         if($status >= 200 && $status < 400)
         {
-            $pd = PseudoDarkleech::analyze($html);
-            if($pd)
+            // load -> /lib/Campaign/*.php
+            foreach(glob(__DIR__ . '/Campaign/*.php') as $file)
             {
-                $this->description = 'pseudoDarkleech';
-            }
-            $ei = EITest::analyze($html);
-            if($ei)
-            {
-                $this->description = 'EITest';
-            }
-            $ei2 = EITest2::analyze($html);
-            if($ei2)
-            {
-                $this->description = 'EITest2';
-            }
-            $af = Afraidgate::analyze($html, $this->url);
-            if($af['is_malicious'])
-            {
-                $this->description = 'Afraidgate (' . $af['js'] . ')';
-                $this->js_content = $af['js_content'];
-            }
-            $af = $af['is_malicious'];
-            $c1 = C1::analyze($html);
-            if($c1)
-            {
-                $this->description = 'C1';
-            }
-            $c2 = C2::analyze($html);
-            if($c2)
-            {
-                $this->description = 'C2';
-            }
-            $c3 = C3::analyze($html);
-            if($c3)
-            {
-                $this->description = 'C3';
-            }
+                if(is_file($file))
+                {
+                    // get class name
+                    $campaign = pathinfo($file)['filename'];
 
-            if($pd || $ei || $ei2 || $af || $c1 || $c2 || $c3)
-            {
-                $this->is_malicious = true;
-                return true;
+                    // analyze
+                    $result = $campaign::analyze($html, $this->url);
+                    // format result
+                    $result['is_malicious'] = $result['is_malicious'] ?? $result;
+
+                    if($result['is_malicious'])
+                    {
+                        $this->description = $campaign;
+                        if(isset($result['js_content']) && $result['js_content'] != null)
+                        {
+                            $this->description .= '(' . $result['js'] . ')';
+                            $this->js_content = $result['js_content'];
+                        }
+                        $this->is_malicious = true;
+                        return true;
+                    }
+                }
             }
         }
         
