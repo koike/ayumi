@@ -15,3 +15,4 @@ require_once 'lib/Campaign/EITest2.php';
 require_once 'lib/Campaign/Afraidgate.php';
 require_once 'lib/Campaign/C1.php';
 require_once 'lib/Campaign/C2.php';
+require_once 'lib/Campaign/C3.php';

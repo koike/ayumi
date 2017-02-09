@@ -3,12 +3,12 @@
 class Analyze
 {
     private $url,
-    $html,
-    $is_malicious,
-    $result,
-    $description,
-    $gist_url,
-    $js_content;
+            $html,
+            $is_malicious,
+            $result,
+            $description,
+            $gist_url,
+            $js_content;
     
     public function __construct(string $url)
     {
@@ -61,8 +61,13 @@ class Analyze
             {
                 $this->description = 'C2';
             }
-            
-            if($pd || $ei || $ei2 || $af || $c1 || $c2)
+            $c3 = C3::analyze($html);
+            if($c3)
+            {
+                $this->description = 'C3';
+            }
+
+            if($pd || $ei || $ei2 || $af || $c1 || $c2 || $c3)
             {
                 $this->is_malicious = true;
                 return true;
