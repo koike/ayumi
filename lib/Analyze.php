@@ -40,7 +40,10 @@ class Analyze
                     // analyze
                     $result = $campaign::analyze($html, $this->url);
                     // format result
-                    $result['is_malicious'] = $result['is_malicious'] ?? $result;
+                    if(!isset($result['is_malicious']))
+                    {
+                        $result['is_malicious'] = $result;
+                    }
 
                     if($result['is_malicious'])
                     {
