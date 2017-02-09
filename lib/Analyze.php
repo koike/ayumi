@@ -42,7 +42,9 @@ class Analyze
                     // format result
                     if(!isset($result['is_malicious']))
                     {
-                        $result['is_malicious'] = $result;
+                        $_result = $result;
+                        $result = [];
+                        $result['is_malicious'] = $_result;
                     }
 
                     if($result['is_malicious'])
