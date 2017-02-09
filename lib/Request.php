@@ -45,6 +45,15 @@ class Request
                 'body'      =>  $response->getBody()
             ];
         }
+        catch(\Throwable $t)
+        {
+            return
+            [
+                'status'    =>  500,
+                'type'      =>  null,
+                'body'      =>  null
+            ];
+        }
         catch(\Exception $e)
         {
             return
@@ -112,6 +121,10 @@ class Request
                 return $url;
             }
             return $extract_url;
+        }
+        catch(\Throwable $t)
+        {
+            return $url;
         }
         catch(\Exception $e)
         {

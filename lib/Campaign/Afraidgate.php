@@ -116,6 +116,10 @@ class Afraidgate
                             }
                         }
                     }
+                    catch(\Throwable $t)
+                    {
+                        //
+                    }
                     catch(\Exception $e)
                     {
                         //
