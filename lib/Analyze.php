@@ -45,13 +45,24 @@ class Analyze
                 $this->description = 'EITest2';
             }
             $af = Afraidgate::analyze($html, $this->url);
-            if($af != null)
+            if($af['is_malicious'])
             {
                 $this->description = 'Afraidgate (' . $af['js'] . ')';
                 $this->js_content = $af['js_content'];
             }
+            $af = $af['is_malicious'];
+            $c1 = C1::analyze($html);
+            if($c1)
+            {
+                $this->description = 'C1';
+            }
+            $c2 = C2::analyze($html);
+            if($c2)
+            {
+                $this->description = 'C2';
+            }
             
-            if($pd || $ei || $ei2 || $af)
+            if($pd || $ei || $ei2 || $af || $c1 || $c2)
             {
                 $this->is_malicious = true;
                 return true;

@@ -8,7 +8,7 @@ class Afraidgate
         (
             preg_match_all
             (
-                '/<script type=\"text\/javascript\" src=\"[!-~]+\.js\"><\/script>/',
+                '/<script type=\"text\/javascript\" src=\".+\.js\"><\/script>/',
                 $html,
                 $js_array,
                 PREG_SET_ORDER
@@ -28,7 +28,7 @@ class Afraidgate
                     // JSが同一サーバ上にある場合は無視
                     if($server_host == $host)
                     {
-                        return null;
+                        return ['is_malicious' => false, 'js' => null, 'content' => null];
                     }
 
                     // 既に調べていないかデータベースを確認
@@ -42,7 +42,7 @@ class Afraidgate
                     );
                     if(!empty($url_accessed))
                     {
-                        return null;
+                        return ['is_malicious' => false, 'js' => null, 'content' => null];
                     }
 
                     $date = date('Y-m-d H:i:s');
@@ -123,6 +123,6 @@ class Afraidgate
                 }
             }
         }
-        return null;
+        return ['is_malicious' => false, 'js' => null, 'content' => null];
     }
 }
