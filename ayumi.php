@@ -58,7 +58,7 @@ while(true)
         if(count($line) == 2)
         {
             $url = 'http://' . $line[1];
-            array_push($urls, $url);
+            $urls[] = $url;
         }
     }
 
