@@ -60,9 +60,22 @@ class Afraidgate
                     {
                         $host = $elements[count($elements) - 2] . '.' . $elements[count($elements) - 1];
                     }
+                    $dns = null;
                     try
                     {
                         $dns = dns_get_record($host, DNS_NS);
+                    }
+                    catch(\Throwable $t)
+                    {
+                        $dns = null;
+                    }
+                    try
+                    {
+                        if($dns == null)
+                        {
+                            continue;
+                        }
+                        
                         for($i=0; $i<count($dns); $i++)
                         {
                             if($dns[$i]['type'] == 'NS')
