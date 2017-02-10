@@ -4,6 +4,10 @@ require_once 'lib/loader.php';
 
 use Dotenv\Dotenv;
 
+// どこまで処理したか
+global $counter;
+$counter = 1000000;
+
 function error_handler($no, $str, $file, $line)
 {
     Notificate::error($no, $str, $file, $line);
@@ -18,7 +22,7 @@ function exception_handler($e)
 
 function shutdown_handler()
 {
-    Notificate::shutdown();
+    Notificate::shutdown($counter);
 }
 
 set_error_handler('error_handler');
@@ -66,6 +70,8 @@ while(true)
     $c = count($urls);
     for($i=$jump; $i<$c; $i++)
     {
+        $counter = $c-$i;
+
         $url = $urls[$i];
 
         $date = date('Y-m-d H:i:s');
@@ -86,11 +92,11 @@ while(true)
         {
             $ayumi->register_db();
             Notificate::slack($ayumi);
-            echo '[*] (' . ($c-$i) . ') ' . $url . PHP_EOL;
+            echo '[*] (' . $counter . ') ' . $url . PHP_EOL;
         }
         else
         {
-            echo '[-] (' . ($c-$i) . ') ' . $url . PHP_EOL;
+            echo '[-] (' . $counter . ') ' . $url . PHP_EOL;
         }
     }
     $jump = 0;
