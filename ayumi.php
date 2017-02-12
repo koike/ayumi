@@ -37,6 +37,15 @@ if($argc >= 2)
 {
     $jump = 1000000 - intval($argv[1]);
 }
+if($jump === 0)
+{
+    $jump = DB::table('URL')->count();
+    if($jump >= 1000000)
+    {
+        DB::table('URL')->delete();
+        $jump = 0;
+    }
+}
 
 while(true)
 {
@@ -108,5 +117,7 @@ while(true)
             echo '[-] (' . $counter . ') ' . $url . PHP_EOL;
         }
     }
+
+    DB::table('URL')->delete();
     $jump = 0;
 }
