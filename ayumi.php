@@ -15,9 +15,9 @@ class G
         G::$c = 1000000;
     }
 
-    public static function counter($now=0)
+    public static function counter($now=-1)
     {
-        if($now != 0)
+        if($now >= 0)
         {
             G::$c = $now;
         }
