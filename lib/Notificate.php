@@ -91,7 +91,7 @@ class Notificate
         }
     }
 
-    public static function shutdown($counter)
+    public static function shutdown()
     {
         $token = getenv('SLACK_TOKEN');
         if($token != null && $token != '')
@@ -112,7 +112,7 @@ class Notificate
 
         // 無限に再起動するのを防ぐために一旦スリープする
         sleep(5 * 60);
-        exec('nohup php ayumi.php ' . $counter .' > /dev/null 2>&1 &', $arr, $res);
+        exec('nohup php ayumi.php ' . G::counter() .' > /dev/null 2>&1 &', $arr, $res);
     }
 
     public static function post($url, $data)

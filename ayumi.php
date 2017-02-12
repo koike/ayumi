@@ -4,9 +4,27 @@ require_once 'lib/loader.php';
 
 use Dotenv\Dotenv;
 
-// どこまで処理したか
-global $counter;
-$counter = 1000000;
+// グローバルスコープで扱いたい変数
+class G
+{
+    // どこまで処理したか
+    private static $c;
+
+    public static function init()
+    {
+        $this->c = 1000000;
+    }
+
+    public static function counter($now=0)
+    {
+        if($now != 0)
+        {
+            $this->c = $now;
+        }
+        return $this->c;
+    }
+}
+G::init();
 
 function error_handler($no, $str, $file, $line)
 {
@@ -22,7 +40,7 @@ function exception_handler($e)
 
 function shutdown_handler()
 {
-    Notificate::shutdown($counter);
+    Notificate::shutdown();
 }
 
 set_error_handler('error_handler');
@@ -79,7 +97,7 @@ while(true)
     $c = count($urls);
     for($i=$jump; $i<$c; $i++)
     {
-        $counter = $c-$i;
+        G::counter($c-$i);
 
         $url = $urls[$i];
 
@@ -110,11 +128,11 @@ while(true)
         {
             $ayumi->register_db();
             Notificate::slack($ayumi);
-            echo '[*] (' . $counter . ') ' . $url . PHP_EOL;
+            echo '[*] (' . G::counter() . ') ' . $url . PHP_EOL;
         }
         else
         {
-            echo '[-] (' . $counter . ') ' . $url . PHP_EOL;
+            echo '[-] (' . G::counter() . ') ' . $url . PHP_EOL;
         }
     }
 
