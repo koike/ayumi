@@ -12,16 +12,16 @@ class G
 
     public static function init()
     {
-        $this->c = 1000000;
+        G::$c = 1000000;
     }
 
     public static function counter($now=0)
     {
         if($now != 0)
         {
-            $this->c = $now;
+            G::$c = $now;
         }
-        return $this->c;
+        return G::$c;
     }
 }
 G::init();
