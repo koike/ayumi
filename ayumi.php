@@ -101,14 +101,14 @@ while(true)
 
         $url = $urls[$i];
 
-        $is_researched = DB::table('URL')
-        ->where('url', $url)
-        ->get();
-        $is_researched = json_decode(json_encode($is_researched), true);
-        if(!empty($is_researched))
-        {
-            continue;
-        }
+        // $is_researched = DB::table('URL')
+        // ->where('url', $url)
+        // ->get();
+        // $is_researched = json_decode(json_encode($is_researched), true);
+        // if(!empty($is_researched))
+        // {
+        //     continue;
+        // }
 
         $date = date('Y-m-d H:i:s');
         DB::table('URL')
