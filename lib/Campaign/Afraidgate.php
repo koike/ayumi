@@ -32,14 +32,7 @@ class Afraidgate
                     }
 
                     // 既に調べていないかデータベースを確認
-                    $url_accessed = json_decode
-                    (
-                        json_encode
-                        (
-                            DB::table('AFRAID')->where('domain', $host)->get()
-                        ),
-                        true
-                    );
+                    $url_accessed = DB::table('AFRAID')->where('domain', $host)->get();
                     if(!empty($url_accessed))
                     {
                         return ['is_malicious' => false, 'js' => null, 'content' => null];
