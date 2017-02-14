@@ -39,15 +39,15 @@ class PseudoDarkleech
         {
             $rate += 0.2;
         }
-        
-        if(strpos($html, 'sourceid=') !== false)
-        {
-            $rate += 0.5;
-        }
-        if(strpos($html, 'aqs=') !== false)
-        {
-            $rate += 0.5;
-        }
+
+        // if(strpos($html, 'sourceid=') !== false)
+        // {
+        //     $rate += 0.5;
+        // }
+        // if(strpos($html, 'aqs=') !== false)
+        // {
+        //     $rate += 0.5;
+        // }
 
         if(strpos($html, 'QMvXcJ') !== false)
         {
