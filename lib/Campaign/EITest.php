@@ -46,6 +46,28 @@ class EITest
             $rate += 0.2;
         }
 
+        if(strpos($html, 'sourceid=') !== false)
+        {
+            $rate += 0.5;
+        }
+        if(strpos($html, 'aqs=') !== false)
+        {
+            $rate += 0.5;
+        }
+
+        if(strpos($html, 'QMvXcJ') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, 'WrwE0q') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, 'fPrfJxzFGMSUb-nJDa9') !== false)
+        {
+            $rate += 1;
+        }
+
         if($rate >= 2)
         {
             return true;
