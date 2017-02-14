@@ -103,7 +103,7 @@ while(true)
 
         // $is_researched = DB::table('URL')
         // ->where('url', $url)
-        // ->get();
+        // ->get()->all();
         // if(!empty($is_researched))
         // {
         //     continue;

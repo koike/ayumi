@@ -8,7 +8,7 @@ use Illuminate\Database\Capsule\Manager as BaseDB;
 class DB
 {
     protected static $db = null;
-    
+
     public static function __callStatic($method, $args)
     {
         if(static::$db == null)
@@ -31,7 +31,7 @@ class DB
                     $event->statement->setFetchMode(PDO::FETCH_ASSOC);
                 }
             );
-            static::$db->setEventDispatcher(new Dispatcher(new Container));
+            static::$db->setEventDispatcher($dispatcher);
             static::$db->setAsGlobal();
         }
 
