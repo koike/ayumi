@@ -67,18 +67,21 @@ if($jump === 0)
 
 while(true)
 {
-    // csvを取得する
-    $url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip';
-    $data = file_get_contents($url);
-    file_put_contents('top-1m.csv.zip', $data);
-
-    $zip = new ZipArchive;
-    if ($zip->open('top-1m.csv.zip') === true)
+    if($jump === 0)
     {
-        $zip->extractTo(__DIR__);
-        $zip->close();
+        // csvを取得する
+        $url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip';
+        $data = file_get_contents($url);
+        file_put_contents('top-1m.csv.zip', $data);
+
+        $zip = new ZipArchive;
+        if ($zip->open('top-1m.csv.zip') === true)
+        {
+            $zip->extractTo(__DIR__);
+            $zip->close();
+        }
+        unlink('top-1m.csv.zip');
     }
-    unlink('top-1m.csv.zip');
 
     // csvを読み込む
     $file = new SplFileObject('top-1m.csv');
