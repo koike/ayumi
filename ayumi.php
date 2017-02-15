@@ -67,7 +67,7 @@ if($jump === 0)
 
 while(true)
 {
-    if($jump === 0)
+    if(!file_exists('top-1m.csv') || $jump === 0)
     {
         // csvを取得する
         $url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip';
