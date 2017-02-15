@@ -23,7 +23,7 @@ class Notificate
                     'token'     =>  $token,
                     'channel'   =>  $channel,
                     'text'      =>  $text,
-                    'username'  =>  'ayumi'
+                    'username'  =>  'ayumi(' . Region::get_region() . ')'
                 ];
                 Notificate::post($url, $data);
             }
@@ -48,7 +48,7 @@ class Notificate
                 'token'     =>  $token,
                 'channel'   =>  $channel,
                 'text'      =>  $text,
-                'username'  =>  'ayumi'
+                'username'  =>  'ayumi(' . Region::get_region() . ')'
             ];
             Notificate::post($url, $data);
         }
@@ -85,7 +85,7 @@ class Notificate
                 'token'     =>  $token,
                 'channel'   =>  $channel,
                 'text'      =>  $text,
-                'username'  =>  'ayumi'
+                'username'  =>  'ayumi(' . Region::get_region() . ')'
             ];
             Notificate::post($url, $data);
         }
@@ -105,7 +105,7 @@ class Notificate
                 'token'     =>  $token,
                 'channel'   =>  $channel,
                 'text'      =>  $text,
-                'username'  =>  'ayumi'
+                'username'  =>  'ayumi(' . Region::get_region() . ')'
             ];
             Notificate::post($url, $data);
         }
