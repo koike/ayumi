@@ -9,7 +9,7 @@ class EITest
         // <body> </body>
         if(preg_match('/<body> <\/body>/', $html))
         {
-            $rate += 0.5;
+            $rate += 1;
         }
 
         // iframeという文字列を持つ変数
