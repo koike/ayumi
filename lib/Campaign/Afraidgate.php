@@ -126,32 +126,34 @@ class Afraidgate
 
     public static function get_ns_record(string $domain) : array
     {
-        exec('dig ' . $domain . ' ns', $out, $ret);
+        exec("dig {$domain} ns", $out, $ret);
 
         $start = $end = 0;
         for($i=0; $i<count($out); $i++)
         {
             if(strpos($out[$i], 'ANSWER SECTION') !== false)
             {
-                $start = $i+ 1;
+                $start = $i + 1;
             }
             if(strpos($out[$i], 'ADDITIONAL SECTION') !== false)
             {
                 $end = $i - 2;
             }
         }
+        
         $ns = [];
         if($start != 0 && $end != 0 && $start < $end)
         {
             $info = array_slice($out, $start, $end - $start);
-            foreach($info as $i)
+            for($i=0; $i<count($info); $i++)
             {
-                $i = str_replace("\t", " ", $i);
-                $i = preg_replace('/[\s]{2,}/', ' ', $i);
-                $a = explode(' ', $i);
-                $ns[] = substr(end($a), 0, -1);
+                $info[$i] = str_replace("\t", " ", $info[$i]);
+                $info[$i] = preg_replace('/[\s]{2,}/', ' ', $info[$i]);
+                $n = explode(' ', $info[$i]);
+                $ns[] = substr(end($n), 0, -1);
             }
         }
+
         return $ns;
     }
 }
