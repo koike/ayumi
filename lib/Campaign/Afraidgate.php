@@ -53,82 +53,66 @@ class Afraidgate
                     {
                         $host = $elements[count($elements) - 2] . '.' . $elements[count($elements) - 1];
                     }
-                    $dns = null;
+                    $ns = [];
                     try
                     {
-                        $dns = dns_get_record($host, DNS_NS);
+                        $ns = Afraidgate::get_ns_record($host);
                     }
                     catch(\Throwable $t)
                     {
-                        $dns = null;
+                        $ns = [];
                     }
+
                     try
                     {
-                        if($dns == null)
+                        if(empty($ns))
                         {
                             continue;
                         }
-                        
-                        for($i=0; $i<count($dns); $i++)
-                        {
-                            if($dns[$i]['type'] == 'NS')
-                            {
-                                $ns = $dns[$i]['target'];
-                                $elements = explode('.', $ns);
-                                if(count($elements) > 2)
-                                {
-                                    $ns = $elements[count($elements) - 2] . '.' . $elements[count($elements) - 1];
-                                }
-                                if($ns == 'afraid.org')
-                                {
-                                    // JSを読み込む
-                                    $js_content = null;
-                                    
-                                    // schemeを含む場合(http://google.com/code.js)
-                                    if(preg_match('/^https?:\/\//', $js))
-                                    {
-                                        $js_content = file_get_contents($js);
-                                    }
-                                    // schemeを含まない場合(//google.com/code.js)
-                                    else if(preg_match('/^\/\//', $js))
-                                    {
-                                        $js_content = file_get_contents('http:' . $js);
-                                    }
-                                    // 相対パスの場合(/code.js)
-                                    else if(preg_match('/^\//', $js))
-                                    {
-                                        $js_content = file_get_contents($url . $js);
-                                    }
-                                    // 相対パスの場合(code.js)
-                                    else
-                                    {
-                                        $js_content = file_get_contents($url . '/' . $js);
-                                    }
 
-                                    $rate = 0;
-                                    if(preg_match('/style="position:absolute; top:-([0-9]{3,4})px/', $js_content))
-                                    {
-                                        $rate += 1;
-                                    }
-                                    if(preg_match('/iframe src="https?:\/\/([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $js_content))
-                                    {
-                                        $rate += 1;
-                                    }
-                                    if($rate >= 1)
-                                    {
-                                        return ['is_malicious' => true, 'js' => $js, 'content' => $js_content];
-                                    }
+                        for($i=0; $i<count($ns); $i++)
+                        {
+                            if($ns[$i] == 'afraid.org')
+                            {
+                                // JSを読み込む
+                                $js_content = null;
+                                
+                                // schemeを含む場合(http://google.com/code.js)
+                                if(preg_match('/^https?:\/\//', $js))
+                                {
+                                    $js_content = file_get_contents($js);
+                                }
+                                // schemeを含まない場合(//google.com/code.js)
+                                else if(preg_match('/^\/\//', $js))
+                                {
+                                    $js_content = file_get_contents('http:' . $js);
+                                }
+                                // 相対パスの場合(/code.js)
+                                else if(preg_match('/^\//', $js))
+                                {
+                                    $js_content = file_get_contents($url . $js);
+                                }
+                                // 相対パスの場合(code.js)
+                                else
+                                {
+                                    $js_content = file_get_contents($url . '/' . $js);
+                                }
+
+                                $rate = 0;
+                                if(preg_match('/style="position:absolute; top:-([0-9]{3,4})px/', $js_content))
+                                {
+                                    $rate += 1;
+                                }
+                                if(preg_match('/iframe src="https?:\/\/([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $js_content))
+                                {
+                                    $rate += 1;
+                                }
+                                if($rate >= 1)
+                                {
+                                    return ['is_malicious' => true, 'js' => $js, 'content' => $js_content];
                                 }
                             }
                         }
-                    }
-                    catch(\Error $e)
-                    {
-                        //
-                    }
-                    catch(\Exception $e)
-                    {
-                        //
                     }
                     catch(\Throwable $t)
                     {
@@ -138,5 +122,36 @@ class Afraidgate
             }
         }
         return ['is_malicious' => false, 'js' => null, 'content' => null];
+    }
+
+    public static function get_ns_record(string $domain) : array
+    {
+        exec('dig ' . $domain . ' ns', $out, $ret);
+
+        $start = $end = 0;
+        for($i=0; $i<count($out); $i++)
+        {
+            if(strpos($out[$i], 'ANSWER SECTION') !== false)
+            {
+                $start = $i+ 1;
+            }
+            if(strpos($out[$i], 'ADDITIONAL SECTION') !== false)
+            {
+                $end = $i - 2;
+            }
+        }
+        $ns = [];
+        if($start != 0 && $end != 0 && $start < $end)
+        {
+            $info = array_slice($out, $start, $end - $start);
+            foreach($info as $i)
+            {
+                $i = str_replace("\t", " ", $i);
+                $i = preg_replace('/[\s]{2,}/', ' ', $i);
+                $a = explode(' ', $i);
+                $ns[] = substr(end($a), 0, -1);
+            }
+        }
+        return $ns;
     }
 }
