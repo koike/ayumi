@@ -12,11 +12,11 @@ class Notificate
             if($token != null && $token != '')
             {
                 $channel = '#alert';
-                $text = '[' . $tomori->get_description() . '] ' . date('Y-m-d H:i:s') .
+                $text = '[' . $ayumi->get_description() . '] ' . date('Y-m-d H:i:s') .
                         "\n```\n" .
-                        $tomori->get_url() .
+                        $ayumi->get_url() .
                         "\n```\n```\n" .
-                        $tomori->get_gist_url() .
+                        $ayumi->get_gist_url() .
                         "\n```";
                 $url = 'https://slack.com/api/chat.postMessage';
                 $data =
