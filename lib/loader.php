@@ -1,8 +1,6 @@
 <?php
 
 require_once 'vendor/autoload.php';
-require_once 'phirehose/Phirehose.php';
-require_once 'phirehose/OauthPhirehose.php';
 
 // require_once /lib/*.php
 foreach(glob(__DIR__ . '/*.php') as $file)
