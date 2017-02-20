@@ -12,55 +12,11 @@ class PseudoDarkleech
             $rate += 1;
         }
         
-        // iframeのsrcが小文字.大文字.大文字からなるドメイン
-        if(preg_match('/iframe src="https?:\/\/([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $html))
-        {
-            $rate += 0.5;
-        }
-
-        // biw, ct, br_fl, tuif, oq
-        if(strpos($html, 'biw=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'ct=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'br_fl=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'tuif=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'oq=') !== false)
-        {
-            $rate += 0.2;
-        }
-
-        // if(strpos($html, 'sourceid=') !== false)
+        // // iframeのsrcが小文字.大文字.大文字からなるドメイン
+        // if(preg_match('/iframe src="https?:\/\/([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9\-_]+)\.([a-zA-Z0-9]+)/', $html))
         // {
-        //     $rate += 0.5;
+        //     $rate += 1;
         // }
-        // if(strpos($html, 'aqs=') !== false)
-        // {
-        //     $rate += 0.5;
-        // }
-
-        if(strpos($html, 'QMvXcJ') !== false)
-        {
-            $rate += 1;
-        }
-        if(strpos($html, 'WrwE0q') !== false)
-        {
-            $rate += 1;
-        }
-        if(strpos($html, 'fPrfJxzFGMSUb-nJDa9') !== false)
-        {
-            $rate += 1;
-        }
 
         if($rate >= 1)
         {

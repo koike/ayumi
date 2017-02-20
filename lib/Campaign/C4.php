@@ -1,11 +1,11 @@
 <?php
 
-class C1
+class C4
 {
     public static function analyze(string $html) : bool
     {
-        // hits?
-        if(preg_match('/<iframe src=[\'|"]https?:\/\/.+hits?/', $html))
+        // .biz/1
+        if(preg_match('/<iframe src=[\'|"]https?:\/\/.+\.biz\/1/', $html))
         {
             return true;
         }

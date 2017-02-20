@@ -60,6 +60,26 @@ class Analyze
                     }
                 }
             }
+
+            // load -> /lib/EK/*.php
+            foreach(glob(__DIR__ . '/EK/*.php') as $file)
+            {
+                if(is_file($file))
+                {
+                    // get class name
+                    $ek = pathinfo($file)['filename'];
+
+                    // analyze
+                    $result = $ek::analyze($html, $this->url);
+
+                    if($result)
+                    {
+                        $this->description = $ek;
+                        $this->is_malicious = true;
+                        return true;
+                    }
+                }
+            }
         }
         
         $this->is_malicious = false;
