@@ -12,7 +12,7 @@ class G
 
     public static function init()
     {
-        G::$c = 1000000;
+        G::$c = 0;
     }
 
     public static function counter($now=-1)
@@ -50,25 +50,25 @@ register_shutdown_function('shutdown_handler');
 $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
-$jump = 0;
-$limit = null;
+$start = 0;
+$end = 1000000;
 $all = getenv('ALL');
 $no = getenv('NO');
 if(is_numeric($all) && is_numeric($no))
 {
     $all = intval($all);
     $no = intval($no);
-    $jump = 1000000 - (1000000 / $all * $no);
-    $limit = 1000000 - (1000000 / $all * ($no+1));
+    $start = 1000000 / $all * $no;
+    $end = 1000000 / $all * ($no + 1);
 }
 if($argc >= 2)
 {
-    $jump = 1000000 - intval($argv[1]);
+    $start = 1000000 - intval($argv[1]);
 }
 
 while(true)
 {
-    if(!file_exists('top-1m.csv') || $jump === 0)
+    if(!file_exists('top-1m.csv') || $start === 0)
     {
         // csvを取得する
         $url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip';
@@ -99,13 +99,9 @@ while(true)
 
     $urls = array_reverse($urls);
     $c = count($urls);
-    if($limit == null)
+    for($i=$start; $i<$end; $i++)
     {
-        $limit = $c;
-    }
-    for($i=$jump; $i<$limit; $i++)
-    {
-        G::counter($c-$i);
+        G::counter($i);
 
         $url = $urls[$i];
 
@@ -136,14 +132,11 @@ while(true)
         {
             $ayumi->register_db();
             Notificate::slack($ayumi);
-            echo '[*] (' . G::counter() . ') ' . $url . PHP_EOL;
+            echo '[*] (' . $i . ') ' . $url . PHP_EOL;
         }
         else
         {
-            echo '[-] (' . G::counter() . ') ' . $url . PHP_EOL;
+            echo '[-] (' . $i . ') ' . $url . PHP_EOL;
         }
     }
-
-    DB::table('URL')->delete();
-    $jump = 0;
 }
