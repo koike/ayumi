@@ -59,7 +59,7 @@ if(is_int($all) && is_int($no))
     $all = intval($all);
     $no = intval($no);
     $jump = 1000000 - (1000000 / $all * $no);
-    $limit = 1000000 - (100000 / $all * ($no+1));
+    $limit = 1000000 - (1000000 / $all * ($no+1));
 }
 if($argc >= 2)
 {
