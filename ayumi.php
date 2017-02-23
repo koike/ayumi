@@ -54,7 +54,7 @@ $jump = 0;
 $limit = null;
 $all = getenv('ALL');
 $no = getenv('NO');
-if(is_int($all) && is_int($no))
+if(is_numeric($all) && is_numeric($no))
 {
     $all = intval($all);
     $no = intval($no);
