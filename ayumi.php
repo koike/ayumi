@@ -51,18 +51,19 @@ $dotenv = new Dotenv(__DIR__);
 $dotenv->load();
 
 $jump = 0;
+$limit = null;
+$all = getenv('ALL');
+$no = getenv('NO');
+if(is_int($all) && is_int($no))
+{
+    $all = intval($all);
+    $no = intval($no);
+    $jump = 1000000 - (1000000 / $all * $no);
+    $limit = 1000000 - (100000 / $all * ($no+1));
+}
 if($argc >= 2)
 {
     $jump = 1000000 - intval($argv[1]);
-}
-if($jump === 0)
-{
-    $jump = DB::table('URL')->count();
-    if($jump >= 1000000)
-    {
-        DB::table('URL')->delete();
-        $jump = 0;
-    }
 }
 
 while(true)
@@ -98,7 +99,11 @@ while(true)
 
     $urls = array_reverse($urls);
     $c = count($urls);
-    for($i=$jump; $i<$c; $i++)
+    if($limit == null)
+    {
+        $limit = $c;
+    }
+    for($i=$jump; $i<$limit; $i++)
     {
         G::counter($c-$i);
 
