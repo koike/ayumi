@@ -27,6 +27,10 @@ class Rig
         {
             $rate += 0.2;
         }
+        if(strpos($html, 'word=') !== false)
+        {
+            $rate += 0.4;
+        }
 
         if(strpos($html, 'QMvXcJ') !== false)
         {
