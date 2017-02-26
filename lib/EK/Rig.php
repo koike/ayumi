@@ -5,7 +5,6 @@ class Rig
     public static function analyze(string $html) : bool
     {
         $rate = 0;
-        $flag = 0;
 
         // biw, ct, br_fl, tuif, oq
         if(strpos($html, 'biw=') !== false)
@@ -27,12 +26,10 @@ class Rig
         if(strpos($html, 'oq=') !== false)
         {
             $rate += 0.2;
-            $flag++;
         }
         if(strpos($html, 'q=') !== false)
         {
             $rate += 0.2;
-            $flag++;
         }
         if(strpos($html, 'word=') !== false)
         {
@@ -52,7 +49,7 @@ class Rig
             $rate += 1;
         }
 
-        if($rate >= 1 || $flag === 2)
+        if($rate >= 1)
         {
             return true;
         }
