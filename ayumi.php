@@ -61,9 +61,10 @@ if(is_numeric($all) && is_numeric($no))
     $start = 1000000 / $all * $no;
     $end = 1000000 / $all * ($no + 1);
 }
+$jump = $start;
 if($argc >= 2)
 {
-    $start = 1000000 - intval($argv[1]);
+    $jump = intval($argv[1]);
 }
 
 while(true)
@@ -99,7 +100,7 @@ while(true)
 
     $urls = array_reverse($urls);
     $c = count($urls);
-    for($i=$start; $i<$end; $i++)
+    for($i=$jump; $i<$end; $i++)
     {
         G::counter($i);
 
@@ -139,4 +140,5 @@ while(true)
             echo '[-] (' . $i . ') ' . $url . PHP_EOL;
         }
     }
+    $jump = $start;
 }
