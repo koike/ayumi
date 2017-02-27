@@ -113,7 +113,7 @@ class Notificate
 
         // 無限に再起動するのを防ぐために一旦スリープする
         sleep(5 * 60);
-        exec('nohup php ayumi.php ' . G::counter() .' > /dev/null 2>&1 &', $arr, $res);
+        exec('nohup php ayumi.php ' . G::counter()+1 .' > /dev/null 2>&1 &', $arr, $res);
     }
 
     public static function post($url, $data)
