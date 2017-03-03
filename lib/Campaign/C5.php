@@ -15,7 +15,7 @@ class C5
         {
             return false;
         }
-        if(preg_match('/^<!doctype/i', $html))
+        if(preg_match('/^<!/i', $html))
         {
             return false;
         }
