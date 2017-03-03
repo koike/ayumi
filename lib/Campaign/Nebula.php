@@ -4,17 +4,14 @@ class Nebula
 {
     public static function analyze(string $html) : bool
     {
-        // URLパラメータの値が56文字で, base64文字列
-        if(preg_match('/\/\?[0-9a-zA-Z_\-]{1,30}=[0-9a-zA-Z_\-]{56}["|\']/', $html, $result))
+        // <div style='width: 1px; height: 1px; position: absolute; left:-500px; top: -500px;'>
+        if(preg_match('/<div style=\'width: 1px; height: 1px; position: absolute; left:-500px; top: -500px;\'>/', $html, $result))
         {
-            $base64_str = explode('=', $result[0])[1];
-            $base64_str = str_replace('"', '', $base64_str);
-            $base64_str = str_replace("'", '', $base64_str);
-            if(base64_decode($base64_str))
-            {
-                return true;
-            }
+            return true;
         }
-        return false;
+        else
+        {
+            return false;
+        }
     }
 }
