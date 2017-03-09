@@ -1,6 +1,6 @@
 <?php
 
-class Nebula
+class Unknown
 {
     public static function analyze(string $html) : bool
     {
