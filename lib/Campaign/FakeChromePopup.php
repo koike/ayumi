@@ -1,6 +1,6 @@
 <?php
 
-class EITest2
+class FakeChromePopup
 {
     public static function analyze(string $html) : bool
     {
