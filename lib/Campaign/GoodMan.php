@@ -1,6 +1,6 @@
 <?php
 
-class Unknown
+class GoodMan
 {
     public static function analyze(string $html) : bool
     {
