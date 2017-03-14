@@ -6,14 +6,26 @@ class Rig
     {
         $rate = 0;
 
-        // biw, ct, br_fl, tuif, oq
-        if(strpos($html, 'br_fl=') !== false)
+        // q, oq, biw, ct, fix, que
+        if(strpos($html, 'oq=') !== false)
         {
-            $rate += 0.5;
+            $rate += 0.2;
         }
-        if(strpos($html, 'tuif=') !== false)
+        if(strpos($html, 'biw=') !== false)
         {
-            $rate += 0.5;
+            $rate += 0.2;
+        }
+        if(strpos($html, 'ct=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'fix=') !== false)
+        {
+            $rate += 0.2;
+        }
+        if(strpos($html, 'que=') !== false)
+        {
+            $rate += 0.2;
         }
 
         if(strpos($html, 'QMvXcJ') !== false)
