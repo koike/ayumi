@@ -72,7 +72,7 @@ while(true)
     if(!file_exists('top-1m.csv') || $start === 0)
     {
         // csvを取得する
-        $url = 'http://s3.amazonaws.com/alexa-static/top-1m.csv.zip';
+        $url = 'http://s3-us-west-1.amazonaws.com/umbrella-static/top-1m.csv.zip';
         $data = file_get_contents($url);
         file_put_contents('top-1m.csv.zip', $data);
 
