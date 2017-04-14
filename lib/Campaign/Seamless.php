@@ -10,8 +10,8 @@ class Seamless
         $html = str_replace(' ', '', $html);
         $html = strtolower($html);
 
-        // <div style='width: 1px; height: 1px; position: absolute; left:-500px; top: -500px;'>
-        if(preg_match('/<center><iframe.+seamless="seamless"/', $html))
+        // <center><iframe width="0" scrolling="no" height="0" frameborder="0" src="" seamless="seamless">
+        if(preg_match('/<center><iframe width="0" scrolling="no" height="0" frameborder="0" src=".+" seamless="seamless">/', $html))
         {
             return true;
         }
