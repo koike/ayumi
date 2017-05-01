@@ -4,6 +4,12 @@ class Seamless
 {
     public static function analyze(string $html) : bool
     {
+        return false;
+
+        //
+        //
+        //
+
         preg_match_all('/<iframe.+>/', $html, $str);
         for($i=0; $i<count($str); $i++)
         {
