@@ -6,7 +6,7 @@ class Rig
     {
         $rate = 0;
 
-        // q, oq, biw, ct, fix, que
+        // q, oq, biw, ct, fix, que, qtuif
         if(strpos($html, 'oq=') !== false)
         {
             $rate += 0.2;
@@ -26,6 +26,10 @@ class Rig
         if(strpos($html, 'que=') !== false)
         {
             $rate += 0.2;
+        }
+        if(strpos($html, 'qtuif=') !== false)
+        {
+            $rate += 0.4;
         }
 
         if(strpos($html, 'QMvXcJ') !== false)

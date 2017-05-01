@@ -18,7 +18,14 @@ class Request
             ];
         }
 
-        $ua = 'Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/7.0; rv:11.0; .NET CLR 2.0.50727; .NET CLR 3.0.04506.30; .NET CLR 3.0.04506.648)';
+        $ua =
+        [
+            'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0; .NET CLR 1.1.4322)',
+            'Mozilla/4.0 (compatible; MSIE 5.23; Windows NT)',
+            'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)',
+            'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705)',
+            'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'
+        ];
         $ref = $url;
 
         $client = new Client(['verify' => false]);
@@ -31,7 +38,7 @@ class Request
                 [
                     'headers'   =>
                     [
-                        'User-Agent'    =>  $ua,
+                        'User-Agent'    =>  $ua[rand(0, count($ua)-1)],
                         'Referer'       =>  $ref
                     ],
                     'timeout'   =>  5
@@ -101,14 +108,21 @@ class Request
             return $extract_url;
         }
         
-        $ua = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36';
+        $ua =
+        [
+            'Mozilla/4.0 (compatible; MSIE 5.01; Windows NT 5.0; .NET CLR 1.1.4322)',
+            'Mozilla/4.0 (compatible; MSIE 5.23; Windows NT)',
+            'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.1.4322)',
+            'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; .NET CLR 1.0.3705)',
+            'Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)'
+        ];
         $ref = $url;
         try
         {
             $curl = curl_init($url);
             $options =
             [
-                CURLOPT_USERAGENT => $ua,
+                CURLOPT_USERAGENT => $ua[rand(0, count($ua)-1)],
                 CURLOPT_TIMEOUT => 5,
                 CURLOPT_HTTPGET => true,
                 CURLOPT_RETURNTRANSFER => true
