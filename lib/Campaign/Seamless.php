@@ -14,6 +14,14 @@ class Seamless
 
             // 全て小文字に変換
             $iframe = strtolower($str[$i][0]);
+
+            // クオートを削除
+            $iframe = str_replace("'", "", $iframe);
+            $iframe = str_replace('"', "", $iframe);
+
+            // 空白を削除
+            $iframe = str_replace("\t", "", $iframe);
+            $iframe = str_replace(" ", "", $iframe);
             
             // <iframe width="0" scrolling="no" height="0" frameborder="0" src="" seamless="seamless">
             $rate = 0;
