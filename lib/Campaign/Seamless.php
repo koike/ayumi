@@ -7,6 +7,11 @@ class Seamless
         preg_match_all('/<iframe.+>/', $html, $str);
         for($i=0; $i<count($str); $i++)
         {
+            if(count($str[$i]) == 0)
+            {
+                continue;
+            }
+
             // 全て小文字に変換
             $iframe = strtolower($str[$i][0]);
             
