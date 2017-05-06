@@ -6,12 +6,8 @@ class Rig
     {
         $rate = 0;
 
-        // q, oq, biw, ct, fix, que, qtuif
+        // q, oq, ct, basket, tuesday, fisher
         if(strpos($html, 'oq=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'biw=') !== false)
         {
             $rate += 0.2;
         }
@@ -19,17 +15,17 @@ class Rig
         {
             $rate += 0.2;
         }
-        if(strpos($html, 'fix=') !== false)
+        if(strpos($html, 'basket=') !== false)
         {
             $rate += 0.2;
         }
-        if(strpos($html, 'que=') !== false)
+        if(strpos($html, 'tuesday=') !== false)
         {
             $rate += 0.2;
         }
-        if(strpos($html, 'qtuif=') !== false)
+        if(strpos($html, 'fisher=') !== false)
         {
-            $rate += 0.4;
+            $rate += 0.2;
         }
 
         if(strpos($html, 'QMvXcJ') !== false)
