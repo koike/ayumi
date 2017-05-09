@@ -4,9 +4,11 @@ class Unknown
 {
     public static function analyze(string $html) : bool
     {
+        $html = str_replace(' ', '', $html);
+        
         if
         (
-            strpos($html, 'function loadjscssfile(filename, filetype)') !== false &&
+            strpos($html, 'functionloadjscssfile(filename,filetype)') !== false &&
             strpos($html, 'filetype=="css"') === false
         )
         {

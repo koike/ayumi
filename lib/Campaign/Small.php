@@ -4,6 +4,8 @@ class Small
 {
     public static function analyze(string $html) : bool
     {
+        return false;
+
         $html = str_replace("\r", "", $html);
         $html = str_replace("\n", "", $html);
 
