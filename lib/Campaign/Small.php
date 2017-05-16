@@ -6,10 +6,29 @@ class Small
     {
         return false;
 
-        $html = str_replace("\r", "", $html);
-        $html = str_replace("\n", "", $html);
+        $html = str_replace("\r", '', $html);
+        $html = str_replace("\n", '', $html);
+        $html = str_replace(' ', '', $html);
+        $html = str_replace("\t", '', $html);
 
-        if(preg_match('/<iframe.+id=\'.+\'.+src=\'http:\/\/.+\?\'.+<\/iframe>.+<\/div>/', $html))
+        if(strpos($html, 'position:absolute;') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, "style='width:368px;") !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, '</iframe></i>') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, "<divstatus='visible'") !== false)
+        {
+            $rate += 1;
+        }
+
+        if($rate > 3)
         {
             return true;
         }

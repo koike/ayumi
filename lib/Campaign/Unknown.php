@@ -15,6 +15,11 @@ class Unknown
             return true;
         }
 
+        if(strpos($html, 'Loading,waitasecond') !== false && strpos($html, 'setTimeout(function(){location.href') !== false)
+        {
+            return true;
+        }
+
         return false;
     }
 }
