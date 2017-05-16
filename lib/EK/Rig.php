@@ -6,7 +6,7 @@ class Rig
     {
         $rate = 0;
 
-        // q, oq, ct, basket, tuesday, fisher
+        // q, oq, ct, car, policy, wendsday
         if(strpos($html, 'oq=') !== false)
         {
             $rate += 0.2;
@@ -15,15 +15,15 @@ class Rig
         {
             $rate += 0.2;
         }
-        if(strpos($html, 'basket=') !== false)
+        if(strpos($html, 'car=') !== false)
         {
             $rate += 0.2;
         }
-        if(strpos($html, 'tuesday=') !== false)
+        if(strpos($html, 'policy=') !== false)
         {
             $rate += 0.2;
         }
-        if(strpos($html, 'fisher=') !== false)
+        if(strpos($html, 'wendsday=') !== false)
         {
             $rate += 0.2;
         }
