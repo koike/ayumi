@@ -4,6 +4,11 @@ class EITest
 {
     public static function analyze(string $html) : bool
     {
+        if(strpos($html, '<script>function GetWindowHeight(){var a=0;return"number"==typeof _Top.window.innerHeight?a=_Top.window.innerHeight:_Top.document.documentElement&&_Top.document.documentElement.clientHeight?') !== false)
+        {
+            return true;
+        }
+
         $rate = 0;
         
         // iframeという文字列を持つ変数
