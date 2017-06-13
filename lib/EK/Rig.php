@@ -6,9 +6,14 @@ class Rig
     {
         $rate = 0;
 
-        if(preg_match("/x[HX3].+Q[cdM].{3}[ab]R/", $html))
+        // if(preg_match("/x[HX3].+Q[cdM].{3}[ab]R/", $html))
+        // {
+        //     return true;
+        // }
+
+        if(strpos($html, 'ecoparamaters') !== false && strpos($html, 'bsession'))
         {
-            return true;
+            $rate++;
         }
 
         if(strpos($html, 'QMvXcJ') !== false)
