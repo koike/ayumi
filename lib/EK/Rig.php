@@ -6,7 +6,7 @@ class Rig
     {
         $rate = 0;
 
-        if(preg_match("/x[HX3].+Q[cdM].{3}[ab]R/", $html))
+        if(preg_match("/x.{2}Q.{5}R/", $html))
         {
             return true;
         }
