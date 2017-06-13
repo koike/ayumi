@@ -6,26 +6,9 @@ class Rig
     {
         $rate = 0;
 
-        // q, oq, ct, car, policy, wendsday
-        if(strpos($html, 'oq=') !== false)
+        if(preg_match("/x[HX3].+Q[cdM].{3}[ab]R/", $html))
         {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'ct=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'car=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'policy=') !== false)
-        {
-            $rate += 0.2;
-        }
-        if(strpos($html, 'wendsday=') !== false)
-        {
-            $rate += 0.2;
+            return true;
         }
 
         if(strpos($html, 'QMvXcJ') !== false)
