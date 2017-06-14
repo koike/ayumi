@@ -4,7 +4,7 @@ class Popunder
 {
     public static function analyze(string $html) : bool
     {
-        if(strpos($html, 'src="/popunder.php"') !== false)
+        if(strpos($html, '/popunder.php"') !== false)
         {
             return true;
         }
