@@ -11,9 +11,13 @@ class Rig
         //     return true;
         // }
 
-        if(strpos($html, 'ecoparamaters') !== false && strpos($html, 'bsession'))
+        if(strpos($html, 'eparamaters') !== false)
         {
-            $rate++;
+            $rate += 1;
+        }
+        if(strpos($html, 'ahr_fl') !== false)
+        {
+            $rate += 1;
         }
 
         if(strpos($html, 'QMvXcJ') !== false)
