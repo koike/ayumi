@@ -33,29 +33,29 @@ class Notificate
 
     public static function ads(Analyze $ayumi)
     {
-        // if($ayumi->get_url() != null)
-        // {
-        //     $token = getenv('SLACK_TOKEN');
-        //     if($token != null && $token != '')
-        //     {
-        //         $channel = '#ads';
-        //         $text = '[' . $ayumi->get_description() . '] ' . date('Y-m-d H:i:s') .
-        //                 "\n```\n" .
-        //                 $ayumi->get_url() .
-        //                 "\n```\n```\n" .
-        //                 $ayumi->get_gist_url() .
-        //                 "\n```";
-        //         $url = 'https://slack.com/api/chat.postMessage';
-        //         $data =
-        //         [
-        //             'token'     =>  $token,
-        //             'channel'   =>  $channel,
-        //             'text'      =>  $text,
-        //             'username'  =>  'ayumi(' . getenv('REGION') . ')'
-        //         ];
-        //         Notificate::post($url, $data);
-        //     }
-        // }
+        if($ayumi->get_url() != null)
+        {
+            $token = getenv('SLACK_TOKEN');
+            if($token != null && $token != '')
+            {
+                $channel = '#ads';
+                $text = '[' . $ayumi->get_description() . '] ' . date('Y-m-d H:i:s') .
+                        "\n```\n" .
+                        $ayumi->get_url() .
+                        "\n```\n```\n" .
+                        $ayumi->get_gist_url() .
+                        "\n```";
+                $url = 'https://slack.com/api/chat.postMessage';
+                $data =
+                [
+                    'token'     =>  $token,
+                    'channel'   =>  $channel,
+                    'text'      =>  $text,
+                    'username'  =>  'ayumi(' . getenv('REGION') . ')'
+                ];
+                Notificate::post($url, $data);
+            }
+        }
     }
 
     public static function error($no, $str, $file, $line)
