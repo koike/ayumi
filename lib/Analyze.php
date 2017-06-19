@@ -136,40 +136,43 @@ class Analyze
         }
         
         // データをgistにPOSTする
-        if($this->js_content != null)
+        if($this->is_suspicious == false)
         {
-            $files =
-            [
-                "data.html" =>
+            if($this->js_content != null)
+            {
+                $files =
                 [
-                    'content'   =>  $this->html . ''
-                ],
-                'code.js' =>
+                    "data.html" =>
+                    [
+                        'content'   =>  $this->html . ''
+                    ],
+                    'code.js' =>
+                    [
+                        'content'   =>  $this->js_content . ''
+                    ],
+                    'ip.json' =>
+                    [
+                        'content'   =>  json_encode($ip_addr) . ''
+                    ]
+                ];
+            }
+            else
+            {
+                $files =
                 [
-                    'content'   =>  $this->js_content . ''
-                ],
-                'ip.json' =>
-                [
-                    'content'   =>  json_encode($ip_addr) . ''
-                ]
-            ];
-        }
-        else
-        {
-            $files =
-            [
-                "data.html" =>
-                [
-                    'content'   =>  $this->html . ''
-                ],
-                'ip.json' =>
-                [
-                    'content'   =>  json_encode($ip_addr) . ''
-                ]
-            ];
-        }
+                    "data.html" =>
+                    [
+                        'content'   =>  $this->html . ''
+                    ],
+                    'ip.json' =>
+                    [
+                        'content'   =>  json_encode($ip_addr) . ''
+                    ]
+                ];
+            }
 
-        $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
+            $this->gist_url = Gist::create('[' . $this->description . '] ' . $this->url, false, $files);
+        }
         
         DB::table('GIST')
         ->insert
