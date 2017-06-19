@@ -133,13 +133,19 @@ while(true)
         if($ayumi->get_is_malicious())
         {
             $ayumi->register_db();
-            Notificate::slack($ayumi);
-            echo '[*] (' . $i . ') ' . $url . PHP_EOL;
+            Notificate::alert($ayumi);
+            // echo '[*] (' . $i . ') ' . $url . PHP_EOL;
         }
-        else
+        else if($ayumi->get_is_suspicious())
         {
-            echo '[-] (' . $i . ') ' . $url . PHP_EOL;
+            $ayumi->register_db();
+            Notificate::ads($ayumi);
+            // echo '[*] (' . $i . ') ' . $url . PHP_EOL;
         }
+        // else
+        // {
+        //     echo '[-] (' . $i . ') ' . $url . PHP_EOL;
+        // }
     }
     $jump = $start;
 }

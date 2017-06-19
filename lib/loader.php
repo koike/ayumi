@@ -28,3 +28,12 @@ foreach(glob(__DIR__ . '/EK/*.php') as $file)
         require_once $file;
     }
 }
+
+// require_once /lib/Malvertising/*.php
+foreach(glob(__DIR__ . '/Malvertising/*.php') as $file)
+{
+    if(is_file($file))
+    {
+        require_once $file;
+    }
+}

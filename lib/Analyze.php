@@ -5,6 +5,7 @@ class Analyze
     private $url,
             $html,
             $is_malicious,
+            $is_suspicious,
             $result,
             $description,
             $gist_url,
@@ -15,6 +16,7 @@ class Analyze
         $this->url = $url;
         $this->html = null;
         $this->is_malicious = false;
+        $this->is_suspicious = false;
         $this->result = null;
         $this->description = null;
         $this->gist_url = null;
@@ -80,9 +82,31 @@ class Analyze
                     }
                 }
             }
+
+            // load -> /lib/Malvertising/*.php
+            foreach(glob(__DIR__ . '/Malvertising/*.php') as $file)
+            {
+                if(is_file($file))
+                {
+                    // get class name
+                    $malvertising = pathinfo($file)['filename'];
+
+                    // analyze
+                    $result = $malvertising::analyze($html, $this->url);
+
+                    if($result['is_suspicious'])
+                    {
+                        $this->description = $result['word'];
+                        $this->is_malicious = false;
+                        $this->is_suspicious = true;
+                        return true;
+                    }
+                }
+            }
         }
         
         $this->is_malicious = false;
+        $this->get_is_suspicious = false;
         return false;
     }
     
@@ -166,6 +190,11 @@ class Analyze
     public function get_is_malicious()
     {
         return $this->is_malicious;
+    }
+
+    public function get_is_suspicious()
+    {
+        return $this->is_suspicious;
     }
     
     public function get_gist_url()
