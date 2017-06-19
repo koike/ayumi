@@ -136,7 +136,7 @@ class Analyze
         }
         
         // データをgistにPOSTする
-        if($this->is_suspicious == false)
+        // if($this->is_suspicious == false)
         {
             if($this->js_content != null)
             {
