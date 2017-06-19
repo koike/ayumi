@@ -10,32 +10,35 @@ class Blacklist
             "4utergamez.com",
             "adexchangeprediction.com",
             "adnetworkperformance.com",
-            "adpays.net",
-            "ads.adamoads.com",
+            // "adpays.net",
+            // "ads.adamoads.com",
             "aduty.com",
-            "adx1.com",
+            "adrunnr.com",
+            // "adx1.com",
             "agpsys.com",
             "bestadbid.com",
             "bestchoisegame.com",
             "bestflashgames.biz",
             "bitadexchange.com",
             "bit-forxx.co",
+            "birdieulx.com",
             "boddygame.org",
             "btcpaying",
             "btc-paying",
             "buzzadexchange.com",
             "bw-club.org",
             "click.seodollars.com",
-            "clickadu.com",
+            // "clickadu.com",
             "clotraiam.website",
             "dao-sprit.com",
-            "done.witchcraftcrash.com",
+            "done.witchcraftcash.com",
             "engine.spotscreenred.info",
             "financeandinfo.org",
             "financeinfoon.net",
             "foblengames.com",
             "for-ex-me.com",
             "forxx-ni.com",
+            "frstlead.com",            
             "fuel.popclok.com",
             "fx4bit.com",
             "gamer2game.com",
@@ -44,13 +47,14 @@ class Blacklist
             "imbarena.net",
             "kinosmak.net",
             "lebhaile.com",
-            "liveadexchanger.com",
+            // "liveadexchanger.com",
             "loveme2hard.com",
             "lovemetoday.net",
             "maxprofitcontrol.com",
             "medialid.net",
             "mil-tech.org",
             "mmaq.net",
+            "mygtmn.com",
             "n152adserv.com",
             "neobitcoin",
             "newtab-media.online",
@@ -69,10 +73,12 @@ class Blacklist
             "portlandmidwife.com",
             "prestoris.com",
             "punditbiz.biz",
+            "qstoo",
             "quickmassiveprofit",
             "quickmoneyprofit",
             "quickwebprofit",
             "quickwwwproit",
+            "roughted.com",
             "rtb.adx1.com",
             "sc133.org",
             "seen-on-screen.club",
@@ -87,6 +93,7 @@ class Blacklist
             "track.reacheffect.com",
             "truegamesz.org",
             "usefall.com",
+            "voluumtrk.com",
             "vpopulargames.com",
             "wizzcaster.com",
             "wonderlandads.com",
@@ -100,7 +107,7 @@ class Blacklist
             "www.xl415.com",
             "www.youradexchange.com",
             "www1.xmediaserve.com",
-            "zg1.zeroredirect11.com"
+            "zg1.zeroredirect11.com",
         ];
 
         foreach($list as $word)
@@ -109,6 +116,11 @@ class Blacklist
             {
                 return ['is_suspicious' => true, 'word' => $word];
             }
+        }
+
+        if(preg_match('/xml\..{3,20}\.com/', $html))
+        {
+            return ['is_suspicious' => true, 'word' => 'xml.com'];
         }
 
         return ['is_suspicious' => false, 'word' => null];
