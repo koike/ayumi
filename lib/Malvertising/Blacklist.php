@@ -13,7 +13,7 @@ class Blacklist
             // "adpays.net",
             // "ads.adamoads.com",
             "aduty.com",
-            "adrunnr.com",
+            // "adrunnr.com",
             // "adx1.com",
             "agpsys.com",
             "bestadbid.com",
@@ -93,7 +93,7 @@ class Blacklist
             "track.reacheffect.com",
             "truegamesz.org",
             "usefall.com",
-            "voluumtrk.com",
+            // "voluumtrk.com",
             "vpopulargames.com",
             "wizzcaster.com",
             "wonderlandads.com",
@@ -107,6 +107,7 @@ class Blacklist
             "www.xl415.com",
             "www.youradexchange.com",
             "www1.xmediaserve.com",
+            "xml.ad.energy",
             "zg1.zeroredirect11.com",
         ];
 
@@ -118,10 +119,10 @@ class Blacklist
             }
         }
 
-        if(preg_match('/xml\..{3,20}\.com/', $html))
-        {
-            return ['is_suspicious' => true, 'word' => 'xml.com'];
-        }
+        // if(preg_match('/xml\..{3,20}\.com/', $html))
+        // {
+        //     return ['is_suspicious' => true, 'word' => 'xml.com'];
+        // }
 
         return ['is_suspicious' => false, 'word' => null];
     }
