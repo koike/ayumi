@@ -69,7 +69,7 @@ class Blacklist
             "park.above.com",
             // "perfectuninstallerpro.com",
             // "plaith.com",
-            "popcash.net",
+            // "popcash.net",
             // "popclock.com",
             // "poptm.com",
             // "portlandmidwife.com",
