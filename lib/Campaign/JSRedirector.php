@@ -2,7 +2,7 @@
 
 class JSRedirector
 {
-    public static function analyze(string $html) : bool
+    public static function analyze(string $html)
     {
         $html = str_replace("\n", "", $html);
         $html = str_replace('"\r', "", $html);
