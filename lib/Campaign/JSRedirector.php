@@ -28,14 +28,19 @@ class JSRedirector
                     ]
                 )
             );
-
-            // document.write('<script src="http://www.example.com/m84MRmlBh.js"><\x2fscript>');
-            $js = str_replace("\n", "", $js);
-            $js = str_replace('"\r', "", $js);
-
-            if(preg_match("/document\.write\('<script src=\"http:\/\/.{1,100}\">/", $js))
+            $js = Request::get($js_url);
+            if($js['status'] >= 200 && $js['status'] < 400)
             {
-                return ['is_malicious' => true, 'js' => $js_url, 'content' => $js];
+                $js = $js['body'];
+
+                // document.write('<script src="http://www.example.com/m84MRmlBh.js"><\x2fscript>');
+                $js = str_replace("\n", "", $js);
+                $js = str_replace('"\r', "", $js);
+
+                if(preg_match("/document\.write\('<script src=\"http:\/\/.{1,100}\">/", $js))
+                {
+                    return ['is_malicious' => true, 'js' => $js_url, 'content' => $js];
+                }
             }
         }
 
