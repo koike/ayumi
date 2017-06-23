@@ -13,21 +13,6 @@ class JSRedirector
             $match = $match[0];
             $js_url = explode("'", explode("src='", $match)[1])[0];
 
-            $js = file_get_contents
-            (
-                $js_url,
-                false,
-                stream_context_create
-                (
-                    [
-                        'http' =>
-                        [
-                            'method'    =>  'GET',
-                            'header'    =>  'User-Agent: Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 6.1; Trident/4.0)'
-                        ]
-                    ]
-                )
-            );
             $js = Request::get($js_url);
             if($js['status'] >= 200 && $js['status'] < 400)
             {
