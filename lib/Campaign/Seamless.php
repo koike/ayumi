@@ -10,6 +10,12 @@ class Seamless
             return true;
         }
 
+        // 194.58.40.252/signup1.php
+        if(strpos($html, '194.58.40.252/signup1.php') !== false)
+        {
+            return true;
+        }
+
         return false;
     }
 }
