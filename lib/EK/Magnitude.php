@@ -8,9 +8,11 @@ class Magnitude
         {
             return true;
         }
-        else
+        
+        // domoney4it.com
+        if(strpos($html, 'domoney4it.com') !== false)
         {
-            return false;
+            return true;
         }
     }
 }

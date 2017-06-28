@@ -47,7 +47,7 @@ class Blacklist
             // "go.padsdel.com",
             // "go.oclasrv.com",
             // "grabbgames.com",
-            "hilltopads.net",
+            // "hilltopads.net",
             // "imbarena.net",
             // "kinosmak.net",
             // "lebhaile.com",
@@ -121,6 +121,16 @@ class Blacklist
             "xml.ad.energy",
             "youradexchange.com",
             // "zg1.zeroredirect11.com",
+            
+            "ad14.traffic-market.com",
+            "avia-on.com",
+            "avia-bookings.com",
+            "avia-book.com",
+            "avia-discount.com",
+            "aviasales-online.com",
+            "ebooking-hotels..com",
+            "hotels-onlinebook.com",
+            "hotels-ebook.com",
         ];
 
         foreach($list as $word)
