@@ -14,5 +14,7 @@ class Magnitude
         {
             return true;
         }
+
+        return false;
     }
 }
