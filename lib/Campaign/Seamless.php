@@ -16,6 +16,28 @@ class Seamless
             return true;
         }
 
+        $rate = 0;
+        if(strpos($html, 'eval(function(p,a,c,k,e,r)') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, '$(2).7(3(){$("8").9();') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, 'href|type|POST|data') !== false)
+        {
+            $rate += 1;
+        }
+        if(strpos($html, 'tz|referrer|he|success|eval') !== false)
+        {
+            $rate += 1;
+        }
+        if($rate >= 3)
+        {
+            return true;
+        }
+        
         return false;
     }
 }

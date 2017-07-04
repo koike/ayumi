@@ -67,6 +67,7 @@ class Blacklist
             // "onclkds.com",
             // "onlinegameser.org",
             // "onlinevapeshops.org",
+            "outedward-engrees.com",
             // "panasiagrp",
             "park.above.com",
             // "perfectuninstallerpro.com",
